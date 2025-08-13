@@ -1,0 +1,194 @@
+[
+  {
+    "id": 1,
+    "branch": "auto",
+    "question": "Quels sont les documents nécessaires pour assurer ma voiture ?",
+    "tags": ["documents", "auto", "assurance"]
+  },
+  {
+    "id": 2,
+    "branch": "auto",
+    "question": "Comment déclarer un sinistre auto ?",
+    "tags": ["sinistre", "auto"]
+  },
+  {
+    "id": 3,
+    "branch": "auto",
+    "question": "Quels sont les types de couverture disponibles pour l'assurance auto ?",
+    "tags": ["couverture", "auto"]
+  },
+  {
+    "id": 4,
+    "branch": "auto",
+    "question": "Est-ce que l'assurance couvre les dommages causés par autrui ?",
+    "tags": ["dommage", "tiers", "auto"]
+  },
+  {
+    "id": 5,
+    "branch": "santé",
+    "question": "Comment obtenir un remboursement médical ?",
+    "tags": ["remboursement", "santé", "médical"]
+  },
+  {
+    "id": 6,
+    "branch": "santé",
+    "question": "Quelles sont les prestations couvertes par le plan OUSRATI ?",
+    "tags": ["prestations", "couverture", "santé"]
+  },
+  {
+    "id": 7,
+    "branch": "santé",
+    "question": "Quels sont les plafonds de remboursement pour les soins médicaux ?",
+    "tags": ["plafonds", "remboursement", "santé"]
+  },
+  {
+    "id": 8,
+    "branch": "santé",
+    "question": "Comment accéder aux soins à l'étranger avec COMAR Santé Internationale ?",
+    "tags": ["soins", "étranger", "santé"]
+  },
+  {
+    "id": 9,
+    "branch": "habitation",
+    "question": "Que faire en cas de sinistre habitation ?",
+    "tags": ["sinistre", "habitation"]
+  },
+  {
+    "id": 10,
+    "branch": "habitation",
+    "question": "Quels types de risques sont couverts par l'assurance habitation ?",
+    "tags": ["risques", "couverture", "habitation"]
+  },
+  {
+    "id": 11,
+    "branch": "habitation",
+    "question": "Comment souscrire à une assurance habitation chez COMAR ?",
+    "tags": ["souscription", "habitation"]
+  },
+  {
+    "id": 12,
+    "branch": "habitation",
+    "question": "Quelles sont les garanties incluses dans le contrat MRH Plus ?",
+    "tags": ["garanties", "contrat", "habitation"]
+  },
+  {
+    "id": 13,
+    "branch": "vie",
+    "question": "Qu'est-ce que l'assurance retraite AGR-PERSPECTIVE RETRAITE ?",
+    "tags": ["retraite", "assurance", "vie"]
+  },
+  {
+    "id": 14,
+    "branch": "vie",
+    "question": "Comment souscrire à une assurance vie chez COMAR ?",
+    "tags": ["souscription", "vie"]
+  },
+  {
+    "id": 15,
+    "branch": "vie",
+    "question": "Quels sont les avantages fiscaux liés à l'assurance vie ?",
+    "tags": ["avantages", "fiscaux", "vie"]
+  },
+  {
+    "id": 16,
+    "branch": "vie",
+    "question": "Comment gérer mon contrat d'assurance vie en ligne ?",
+    "tags": ["contrat", "gestion", "vie"]
+  },
+  {
+    "id": 17,
+    "branch": "pro",
+    "question": "Qu'est-ce que l'assurance responsabilité civile professionnelle ?",
+    "tags": ["responsabilité", "civile", "professionnelle"]
+  },
+  {
+    "id": 18,
+    "branch": "pro",
+    "question": "Comment souscrire à une assurance RC pour les professions libérales ?",
+    "tags": ["souscription", "profession", "libérale"]
+  },
+  {
+    "id": 19,
+    "branch": "pro",
+    "question": "Quels sont les risques couverts par l'assurance RC professionnelle ?",
+    "tags": ["risques", "couverts", "professionnelle"]
+  },
+  {
+    "id": 20,
+    "branch": "pro",
+    "question": "Comment déclarer un sinistre en tant que professionnel assuré ?",
+    "tags": ["sinistre", "professionnel"]
+  },
+  {
+    "id": 21,
+    "branch": "rc",
+    "question": "Qu'est-ce que l'assurance responsabilité civile des professionnels de transport ?",
+    "tags": ["responsabilité", "civile", "transport"]
+  },
+  {
+    "id": 22,
+    "branch": "rc",
+    "question": "Quels types de dommages sont couverts par cette assurance ?",
+    "tags": ["dommages", "couverts", "rc"]
+  },
+  {
+    "id": 23,
+    "branch": "rc",
+    "question": "Comment souscrire à une assurance RC professionnelle ?",
+    "tags": ["souscription", "rc", "professionnelle"]
+  },
+  {
+    "id": 24,
+    "branch": "rc",
+    "question": "Quelles sont les exclusions de garantie dans l'assurance RC ?",
+    "tags": ["exclusions", "garantie", "rc"]
+  },
+  {
+    "id": 25,
+    "branch": "voyage",
+    "question": "Quelles garanties sont incluses dans l'assurance voyage COMAR ?",
+    "tags": ["garanties", "voyage", "comar"]
+  },
+  {
+    "id": 26,
+    "branch": "voyage",
+    "question": "Comment souscrire à une assurance voyage avant mon départ ?",
+    "tags": ["souscription", "voyage"]
+  },
+  {
+    "id": 27,
+    "branch": "voyage",
+    "question": "Que faire en cas de sinistre pendant mon voyage ?",
+    "tags": ["sinistre", "voyage"]
+  },
+  {
+    "id": 28,
+    "branch": "voyage",
+    "question": "L'assurance voyage couvre-t-elle les frais médicaux à l'étranger ?",
+    "tags": ["frais", "médicaux", "étranger"]
+  },
+  {
+    "id": 29,
+    "branch": "général",
+    "question": "Comment contacter mon agence COMAR ?",
+    "tags": ["contact", "agence"]
+  },
+  {
+    "id": 30,
+    "branch": "général",
+    "question": "Comment déclarer un sinistre chez COMAR ?",
+    "tags": ["déclaration", "sinistre"]
+  },
+  {
+    "id": 31,
+    "branch": "général",
+    "question": "Comment accéder à mes documents d'assurance en ligne ?",
+    "tags": ["documents", "assurance", "en ligne"]
+  },
+  {
+    "id": 32,
+    "branch": "général",
+    "question": "Quelles sont les modalités de paiement des primes d'assurance ?",
+    "tags": ["paiement", "primes"]
+  }
+]
