@@ -135,7 +135,7 @@
     const loadQuestions = async () => {
       if (selectedTags.length === 0) {
         try {
-          const res = await fetch(`http://localhost:8000/questions/branch/général`);
+          const res = await fetch(`http://127.0.0.1:8000/questions/branch/général`);
           const data = await res.json();
           const formatted = data.map((q: any) => ({
             key: q.id.toString(),
