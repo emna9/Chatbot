@@ -47,7 +47,7 @@ L’objectif est d’offrir un service interactif, accessible en ligne et capabl
 - SlowAPI – Limitation des requêtes  
 - Scikit-learn, NumPy, SciPy – Calculs et analyses  
 
-📄 Liste complète des dépendances : `backend/requirements.txt`  
+📄 Liste complète des dépendances : `backend/requirements-backend.txt`  
 
 ---
 
@@ -59,12 +59,12 @@ L’objectif est d’offrir un service interactif, accessible en ligne et capabl
 git clone https://github.com/emna9/Chatbot.git
 cd Chatbot
 
-4.2 Backend
+### 4.2 Backend
 cd backend
 pip install -r requirements.txt
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
 
-4.3 Frontend
+### 4.3 Frontend
 cd ../frontend
 npm install $(cat requirements-frontend.txt)
 npm start
