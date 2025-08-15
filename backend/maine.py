@@ -27,8 +27,8 @@ app.state.limiter = limiter
 # CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
+    allow_origins=["http://localhost:3000"],  # frontend origin
+    allow_credentials=True,                   # keep True if you send cookies or auth headers
     allow_methods=["*"],
     allow_headers=["*"],
 )
