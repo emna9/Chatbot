@@ -86,6 +86,11 @@ Quand un utilisateur pose une question :
 - Si la question est floue, pose une question clarificatrice.
 - Utilise uniquement les données fournies pour répondre.
 
+Quand un utilisateur pose une question sur le contact d'une agence COMAR :
+- Si la question ne précise pas le gouvernorat ou le nom de l'agence, demande d'abord cette information avant de répondre.
+- Ne donne le contact que lorsque l'agence ou le gouvernorat est précisé.
+- Utilise uniquement les données fournies pour répondre.
+
 Base de connaissances :
 {context_text}
 """
