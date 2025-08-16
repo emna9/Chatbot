@@ -54,17 +54,21 @@ L’objectif est d’offrir un service interactif, accessible en ligne et capabl
 ## 4. Installation et exécution
 
 ### 4.1 Cloner le projet
-
-```bash
+```
 git clone https://github.com/emna9/Chatbot.git
 cd Chatbot
+```
 
 ### 4.2 Backend
+```
 cd backend
 pip install -r requirements.txt
 uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
 
 ### 4.3 Frontend
+```
 cd ../frontend
 npm install $(cat requirements-frontend.txt)
 npm start
+```
