@@ -1,13 +1,7 @@
 import React from 'react';
-import { Canvas } from '@react-three/fiber'
-import Independent from './components/Independent';
+import MainLayout from './components/MainLayout';
+const App: React.FC = () => {
+  return <MainLayout />;
+};
 
-
-function App() {
-  return (
-  
-        <Independent />
-  )
-}
-
-export default App
+export default App;

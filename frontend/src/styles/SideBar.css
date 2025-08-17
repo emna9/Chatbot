@@ -1,0 +1,27 @@
+.sidebar {
+  background-color: #f9fbfd;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: fixed;   /* change sticky -> fixed */
+  top: 0;
+  left: 0;
+  z-index: 100;      /* keep above other content */
+}
+
+.sidebar .ant-menu {
+  flex: 1;
+  border-right: none;
+}
+
+.sidebar .sidebar-footer {
+  padding: 16px;
+  text-align: center;
+}
+/* Menu */
+/* .sidebar .ant-menu {
+  flex: 1;
+  border-right: none;
+  background-color: #f9fbfd !important;
+} */
+
