@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
-import L, { LatLngExpression, LatLngTuple } from 'leaflet';
+import L, { LatLngExpression, LatLngTuple, Map as LeafletMap } from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-// Fix Leaflet icon issue for TypeScript:
+// Fix Leaflet icon issue
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.3/dist/images/marker-icon-2x.png',
@@ -26,7 +26,7 @@ interface ChangeViewProps {
 
 function ChangeView({ center, zoom }: ChangeViewProps) {
   const map = useMap();
-  React.useEffect(() => {
+  useEffect(() => {
     map.setView(center, zoom);
   }, [center, zoom, map]);
   return null;
@@ -36,67 +36,62 @@ const TunisiaMap: React.FC = () => {
   const defaultPosition: LatLngTuple = [34.5, 9.5];
   const zoomLevel = 8;
 
-  const [userPosition, setUserPosition] = React.useState<LatLngTuple | null>(null);
-  const [error, setError] = React.useState<string | null>(null);
-  const [loading, setLoading] = React.useState<boolean>(true);
-  const [agencies, setAgencies] = React.useState<Agency[]>([]);
+  const [userPosition, setUserPosition] = useState<LatLngTuple | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [agencies, setAgencies] = useState<Agency[]>([]);
 
-  React.useEffect(() => {
+  // Create a ref to the map
+  const mapRef = useRef<LeafletMap | null>(null);
+
+  useEffect(() => {
     if (!navigator.geolocation) {
-      const msg = "La géolocalisation n'est pas supportée par votre navigateur.";
-      console.error(msg);
-      setError(msg);
+      setError("La géolocalisation n'est pas supportée par votre navigateur.");
       setLoading(false);
       return;
     }
 
-    console.log("Obtaining user's position...");
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
-        console.log("User's position obtained:", latitude, longitude);
         setUserPosition([latitude, longitude]);
 
-        const url = `http://localhost:8000/nearby-agences?lat=${latitude}&lng=${longitude}&limit=5`;
-        console.log("Fetching nearby agencies from:", url);
-
-        fetch(url)
-          .then((res) => {
-            if (!res.ok) {
-              throw new Error(`HTTP error! Status: ${res.status}`);
-            }
-            return res.json();
-          })
+        fetch(`http://localhost:8000/nearby-agences?lat=${latitude}&lng=${longitude}&limit=5`)
+          .then(res => res.json())
           .then((data: Agency[]) => {
-            console.log("Nearby agencies fetched:", data);
             setAgencies(data);
             setLoading(false);
           })
-          .catch((err) => {
-            const msg = "Erreur lors de la récupération des agences: " + err.message;
-            console.error(msg);
-            setError(msg);
+          .catch(err => {
+            setError("Erreur lors de la récupération des agences: " + err.message);
             setLoading(false);
           });
       },
       (err) => {
-        const msg = "Impossible d'obtenir votre position : " + err.message;
-        console.error(msg);
-        setError(msg);
+        setError("Impossible d'obtenir votre position : " + err.message);
         setLoading(false);
       }
     );
   }, []);
 
+  // When the map ref is ready, fix gray tiles
+  useEffect(() => {
+    if (mapRef.current) {
+      setTimeout(() => mapRef.current?.invalidateSize(), 100);
+    }
+  }, [userPosition, agencies]);
+
   return (
-<div style={{ height: '400px', width: '100%', borderRadius: '10px', overflow: 'hidden' }}>
-{error && <div style={{ color: 'red' }}>{error}</div>}
+    <div style={{ height: '400px', width: '100%', borderRadius: '10px', overflow: 'hidden' }}>
+      {error && <div style={{ color: 'red' }}>{error}</div>}
       {loading && <div>Chargement...</div>}
+
       <MapContainer
         center={userPosition ?? defaultPosition}
         zoom={zoomLevel}
         scrollWheelZoom={false}
         style={{ height: '100%', width: '100%' }}
+        ref={mapRef} // <-- assign ref here
       >
         <ChangeView center={userPosition ?? defaultPosition} zoom={zoomLevel} />
         <TileLayer

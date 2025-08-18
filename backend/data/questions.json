@@ -8,19 +8,19 @@
   {
     "id": 2,
     "branch": "auto",
-    "question": "Comment déclarer un sinistre auto ?",
+    "question": "C’est quoi l’assurance auto COMAR ?",
     "tags": ["sinistre", "auto"]
   },
   {
     "id": 3,
     "branch": "auto",
-    "question": "Quels sont les types de couverture disponibles pour l'assurance auto ?",
+    "question": "Que dois-je faire en cas de sinistre avec mon assurance auto COMAR ?",
     "tags": ["couverture", "auto"]
   },
   {
     "id": 4,
     "branch": "auto",
-    "question": "Est-ce que l'assurance couvre les dommages causés par autrui ?",
+    "question": "Est-ce que l’assurance auto COMAR couvre le vol de véhicule ?",
     "tags": ["dommage", "tiers", "auto"]
   },
   {
@@ -38,13 +38,13 @@
   {
     "id": 7,
     "branch": "santé",
-    "question": "Quels sont les plafonds de remboursement pour les soins médicaux ?",
+    "question": "Qu’est-ce que CANCER PROTECT ?",
     "tags": ["plafonds", "remboursement", "santé"]
   },
   {
     "id": 8,
     "branch": "santé",
-    "question": "Comment accéder aux soins à l'étranger avec COMAR Santé Internationale ?",
+    "question": "Est-ce que les médicaments sont remboursés ?",
     "tags": ["soins", "étranger", "santé"]
   },
   {
@@ -62,8 +62,8 @@
   {
     "id": 11,
     "branch": "habitation",
-    "question": "Comment souscrire à une assurance habitation chez COMAR ?",
-    "tags": ["souscription", "habitation"]
+    "question": "Pourquoi choisir COMAR Habitation plutôt qu’une autre assurance ?",
+    "tags": ["habitation"]
   },
   {
     "id": 12,
@@ -104,8 +104,8 @@
   {
     "id": 18,
     "branch": "pro",
-    "question": "Comment souscrire à une assurance RC pour les professions libérales ?",
-    "tags": ["souscription", "profession", "libérale"]
+    "question": "Qui doit souscrire une RC Pro ?",
+    "tags": ["souscription"]
   },
   {
     "id": 19,
@@ -128,14 +128,14 @@
   {
     "id": 22,
     "branch": "rc",
-    "question": "Quels types de dommages sont couverts par cette assurance ?",
-    "tags": ["dommages", "couverts", "rc"]
+    "question": "Est-ce que la RC couvre les fautes graves ou intentionnelles ?",
+    "tags": ["faute", "rc"]
   },
   {
     "id": 23,
     "branch": "rc",
-    "question": "Comment souscrire à une assurance RC professionnelle ?",
-    "tags": ["souscription", "rc", "professionnelle"]
+    "question": "Quels documents sont nécessaires pour souscrire une assurance RC ?",
+    "tags": ["souscription", "rc"]
   },
   {
     "id": 24,
@@ -152,8 +152,8 @@
   {
     "id": 26,
     "branch": "voyage",
-    "question": "Comment souscrire à une assurance voyage avant mon départ ?",
-    "tags": ["souscription", "voyage"]
+    "question": "Quels sont les types d’assurances voyage proposés par COMAR ?",
+    "tags": ["voyage"]
   },
   {
     "id": 27,
@@ -164,8 +164,8 @@
   {
     "id": 28,
     "branch": "voyage",
-    "question": "L'assurance voyage couvre-t-elle les frais médicaux à l'étranger ?",
-    "tags": ["frais", "médicaux", "étranger"]
+    "question": "Est-ce que je peux souscrire une assurance voyage en ligne ?",
+    "tags": ["souscription"]
   },
   {
     "id": 29,

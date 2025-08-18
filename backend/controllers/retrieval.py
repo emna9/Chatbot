@@ -16,31 +16,51 @@ def normalize_text(text):
     return text
 
 def get_text_for_embedding(chunk):
-    # Use content field if exists and not empty
-    if "content" in chunk and chunk["content"].strip() != "":
-        return chunk["content"]
-    else:
-        # Compose meaningful text from known fields
-        parts = []
-        if "nom" in chunk:
-            parts.append(f"Nom: {chunk['nom']}")
-        if "type" in chunk:
-            parts.append(f"Type: {chunk['type']}")
-        if "adresse" in chunk:
-            parts.append(f"Adresse: {chunk['adresse']}")
-        if "telephone" in chunk:
-            parts.append(f"Téléphone: {chunk['telephone']}")
-        if "fax" in chunk:
-            parts.append(f"Fax: {chunk['fax']}")
-        if "email" in chunk:
-            parts.append(f"Email: {chunk['email']}")
-        if "code_agence" in chunk:
-            parts.append(f"Code Agence: {chunk['code_agence']}")
-        if "latitude" in chunk and "longitude" in chunk:
-            parts.append(f"Coordinates: {chunk['latitude']}, {chunk['longitude']}")
-        return ", ".join(parts)
+    """
+    Extraction explicite des champs de ton JSON santé
+    pour que tout soit pris en compte par l'index FAISS.
+    """
+    parts = []
 
-# Load your knowledge base JSON chunks
+    # Nom et URL
+    if "nom" in chunk:
+        parts.append(f"Nom: {chunk['nom']}")
+    if "url" in chunk:
+        parts.append(f"URL: {chunk['url']}")
+
+    # Sections principales
+    sections = chunk.get("sections", {})
+    if "aperçu" in sections:
+        parts.append(f"Aperçu: {sections['aperçu']}")
+    if "couverture" in sections:
+        parts.append(f"Couverture: {sections['couverture']}")
+    if "plans" in sections:
+        parts.append(f"Plans: {sections['plans']}")
+
+    # Services
+    for service in sections.get("services", []):
+        parts.append(f"Service: {service}")
+
+    # Couverture médicale
+    for item in sections.get("couverture_medicale", []):
+        parts.append(f"Couverture médicale: {item}")
+
+    # Fonctionnalités spéciales
+    for item in sections.get("fonctionnalités_spéciales", []):
+        parts.append(f"Fonctionnalité spéciale: {item}")
+
+    # Contact
+    contact = sections.get("contact", {})
+    for key, value in contact.items():
+        parts.append(f"{key.capitalize()}: {value}")
+
+    # Légal
+    for item in sections.get("légal", []):
+        parts.append(f"Légal: {item}")
+
+    return "\n".join(parts)
+
+# Charger la base de connaissance
 def load_knowledge_base(path="data/split_knowledge_base"):
     all_chunks = []
     for filename in os.listdir(path):
@@ -53,7 +73,6 @@ def load_knowledge_base(path="data/split_knowledge_base"):
                     print(f"Loaded {len(chunks)} chunks from {filename}")
     print(f"Total chunks loaded: {len(all_chunks)}")
     return all_chunks
-
 
 KNOWLEDGE_BASE = load_knowledge_base()
 
@@ -85,5 +104,5 @@ class Retriever:
         results = [self.kb[i] for i in indices[0]]
         return results
 
-# Create a global retriever instance (load or build index on startup)
+# Instance globale
 retriever = Retriever()

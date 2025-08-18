@@ -19,9 +19,44 @@
   text-align: center;
 }
 /* Menu */
-/* .sidebar .ant-menu {
+.sidebar .ant-menu {
   flex: 1;
   border-right: none;
   background-color: #f9fbfd !important;
-} */
+}
 
+/* Section title container (flex row) */
+.menu-section-title {
+  display: flex;
+  align-items: center;
+}
+
+/* Dropdown icon on the left of section title */
+.menu-section-icon {
+  font-size: 14px;
+  color: #000033ff;
+  width: 24px; /* aligns with menu item icons */
+  display: inline-block;
+}
+
+/* Section title text */
+.menu-section-text {
+  font-size: 14px;
+  font-weight: 600;
+  color:  #000033ff;
+  margin-left: 4px; /* spacing between icon and text */
+}
+
+/* Optional: adjust padding-left if needed to align with Menu.Item labels */
+.menu-section-title span {
+  padding-left: 0; 
+}
+.sidebar-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  display: block;
+  margin: 16px 16px;
+  margin-left: 25px;
+  transition: margin 0.2s ease;
+}

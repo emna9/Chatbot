@@ -25,11 +25,11 @@ import 'leaflet/dist/leaflet.css'; // Leaflet CSS
 import HeaderSection from '../components/HeaderSection';
 import { Question } from '../../types/Question';
 import { BRANCH_INFO } from '../data/branchInfo';
-import TunisiaMap from '../components/TunisiaMap';
 import { generateCourse } from '../services/mistralService';
 import { fetchQuestionsByTags } from '../services/tagService';
 import Loader from '../components/Loader';
 import { marked } from 'marked';
+import ChatHeader from '../components/ChatHeader';
 
 interface CustomTagProps {
   label: React.ReactNode;
@@ -41,7 +41,10 @@ interface CustomTagProps {
 type IndependentProps = {
   dynamicPrompts?: { key: string; description: string }[] | null;
   selectedBranch?: string;
+  selectedTags: string[];
 };
+
+
 
 const TAG_OPTIONS = [
   { label: 'auto', value: 'auto' },
@@ -57,7 +60,7 @@ const DEFAULT_CONVERSATIONS_ITEMS = [
   { key: 'default-2', label: 'New AGI Hybrid Interface', group: 'Yesterday' },
 ];
 
-const Independent: React.FC<IndependentProps> = ({ dynamicPrompts: parentPrompts = null, selectedBranch: parentBranch = 'général' }) => {
+const Independent: React.FC<IndependentProps> = ({ dynamicPrompts: parentPrompts = null, selectedBranch: parentBranch = 'général',selectedTags: parentTags = [], }) => {
   const abortController = useRef<AbortController | null>(null);
   const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
   const [loading, setLoading] = useState(false);
@@ -71,7 +74,7 @@ const Independent: React.FC<IndependentProps> = ({ dynamicPrompts: parentPrompts
   const [selectedBranch, setSelectedBranch] = useState<string>(parentBranch);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [theme, setTheme] = React.useState<'light' | 'dark'>('light');
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  
   const chatListRef = useRef<HTMLDivElement>(null);
 
   // Keep local state in sync when parent updates props
@@ -108,25 +111,26 @@ const Independent: React.FC<IndependentProps> = ({ dynamicPrompts: parentPrompts
   // Format assistant markdown text into paragraphs
   const formatAssistantText = (text: string) => {
     const paragraphs = text.trim().split(/\n\s*\n/).filter(Boolean);
-    return (
-      <div className="prose prose-invert max-w-none text-sm" style={{ whiteSpace: 'normal' }}>
-        {paragraphs.map((para, idx) => (
-          <div key={idx} dangerouslySetInnerHTML={{ __html: marked.parse(para) }} style={{ marginBottom: '1em' }} />
-        ))}
-      </div>
-    );
-  };
+  return (
+    <div className="prose prose-invert max-w-none text-sm" style={{ whiteSpace: 'normal' }}>
+      {paragraphs.map((para, idx) => (
+        <div
+          key={idx}
+          dangerouslySetInnerHTML={{ __html: marked.parse(para) as string }}
+          style={{ marginBottom: '1em' }}
+        />
+      ))}
+    </div>
+  );
+};
+const loadQuestions = async () => {
+  // if (parentPrompts) return; // parent already provided prompts — don't override
 
-  // Reusable loadQuestions function (fallback when parent didn't provide prompts)
-  const loadQuestions = async () => {
-    if (parentPrompts) return; // parent already provided prompts — don't override
-
-    if (selectedTags.length === 0) {
+    if (!parentTags || parentTags.length === 0) {
       try {
         const res = await fetch('http://127.0.0.1:8000/questions/branch/général');
         const data = await res.json();
-        const formatted = data.map((q: any) => ({ key: q.id.toString(), description: q.question }));
-        setDynamicPrompts(formatted);
+        setDynamicPrompts(data.map((q: any) => ({ key: q.id.toString(), description: q.question })));
       } catch (err) {
         console.error('Failed to fetch general questions:', err);
         setDynamicPrompts([]);
@@ -135,19 +139,40 @@ const Independent: React.FC<IndependentProps> = ({ dynamicPrompts: parentPrompts
     }
 
     try {
-      const data = await fetchQuestionsByTags(selectedTags);
-      const formatted = data.map((q: any) => ({ key: q.id.toString(), description: q.question }));
-      setDynamicPrompts(formatted);
+      const data = await fetchQuestionsByTags(parentTags); // ✅ use parentTags
+      setDynamicPrompts(data.map((q: any) => ({ key: q.id.toString(), description: q.question })));
     } catch (err) {
       console.error('Failed to fetch questions by tags:', err);
       setDynamicPrompts([]);
     }
   };
 
-  useEffect(() => {
-    loadQuestions();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedTags, parentPrompts]);
+
+
+// Whenever parentBranch or parentTags change, reload questions
+useEffect(() => {
+  const fetchBranchQuestions = async () => {
+    if (!parentBranch) return;
+
+    try {
+      let data;
+      if (parentTags && parentTags.length > 0) {
+        data = await fetchQuestionsByTags(parentTags);
+      } else {
+        const res = await fetch(`http://127.0.0.1:8000/questions/branch/${parentBranch}`);
+        data = await res.json();
+      }
+
+      setDynamicPrompts(data.map((q: any) => ({ key: q.id.toString(), description: q.question })));
+    } catch (err) {
+      console.error('Failed to fetch questions:', err);
+      setDynamicPrompts([]);
+    }
+  };
+
+  fetchBranchQuestions();
+}, [parentBranch, parentTags]);
+
 
   // Scroll chat to bottom on new message
   useEffect(() => {
@@ -168,7 +193,6 @@ const Independent: React.FC<IndependentProps> = ({ dynamicPrompts: parentPrompts
   // Reset function
   const resetToStart = () => {
     setMessages([]);
-    setSelectedTags([]);
     setInputValue('');
     setSelectedBranch('général');
     setLoading(false);
@@ -206,6 +230,9 @@ const Independent: React.FC<IndependentProps> = ({ dynamicPrompts: parentPrompts
     }
   }, [messages, curConversation]);
 
+const chatHeader = <ChatHeader selectedBranch={selectedBranch} theme={theme} />;
+
+
   // Chat list JSX
   const chatList = (
     <div
@@ -239,116 +266,53 @@ const Independent: React.FC<IndependentProps> = ({ dynamicPrompts: parentPrompts
           )}
         </>
       ) : (
-        <div
-          className="placeholder"
-          style={{
-            paddingInline: 'calc((100% - 700px) / 2)',
-            display: 'flex',
-            flexDirection: 'column',
-            gap: 16,
-          }}
-        >
-          <div
-            style={{
-              maxWidth: 700,
-              width: '100%',
-              margin: '0 auto',
-              paddingTop: 48,
-              textAlign: 'center',
-            }}
-          >
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 10,
-                flexDirection: 'column',
-              }}
-            >
-              {/* Show Comar Logo if 'général', else show branch icon */}
-              {selectedBranch === 'général' ? (
-                <img src="/img/logofree.png" alt="Comar Logo" style={{ width: 70, height: 70, objectFit: 'contain' }} />
-              ) : (
-                <div>{BRANCH_INFO[selectedBranch]?.icon}</div>
-              )}
+<div
+  className="placeholder"
+  style={{
+    paddingInline: 'calc((100% - 700px) / 2)',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 16,
+  }}
+>
+  {/* Prompts component only */}
+  <div style={{ maxWidth: 700, width: '100%', marginTop: 24 }}>
+    <Prompts
+      wrap
+      items={
+        dynamicPrompts && dynamicPrompts.length > 0
+          ? dynamicPrompts.map((item) => ({
+              key: item.key,
+              icon: <BulbOutlined style={{ color: '#1890ff' }} />,
+              description: item.description,
+            }))
+          : [
+              {
+                key: 'loading',
+                label: 'Loading...',
+                description: 'Loading general questions...',
+              },
+            ]
+      }
+      onItemClick={(info) => {
+        onSubmit(info.data.description as string);
+      }}
+      styles={{
+        list: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 },
+        item: {
+          cursor: 'pointer',
+          borderRadius: 12,
+          backgroundColor: theme === 'light' ? '#f9fbfd' : '#1e1e1e',
+          color: theme === 'light' ? '#000' : '#eee',
+          padding: '10px 12px',
+          userSelect: 'none',
+        },
+      }}
+    />
+  </div>
+</div>
 
-              {/* Text with color based on theme */}
-              <span
-                style={{
-                  fontSize: 20,
-                  fontWeight: 600,
-                  color: theme === 'dark' ? '#fff' : '#1f1f1f',
-                  marginTop: 8,
-                  textAlign: 'center',
-                }}
-              >
-                {selectedBranch === 'général' ? 'Je suis Comar Assurances Chatbot.' : ''}
-              </span>
-            </div>
 
-            <div
-              style={{
-                fontSize: 13,
-                color: '#666',
-                fontWeight: 500,
-                marginTop: 10,
-              }}
-            >
-              {BRANCH_INFO[selectedBranch]?.description || 'Comment puis-je vous assister aujourd’hui ?'}
-            </div>
-          </div>
-
-          <div style={{ maxWidth: 700, width: '100%', marginTop: 16 }}>
-            <Select
-              mode="multiple"
-              placeholder="Choisissez vos mots-clés"
-              tagRender={tagRender}
-              options={TAG_OPTIONS}
-              style={{
-                width: '100%',
-                backgroundColor: theme === 'light' ? '#fff' : '#2c2c2c',
-                color: theme === 'light' ? '#000' : '#eee',
-              }}
-              dropdownStyle={{
-                backgroundColor: theme === 'light' ? '#fff' : '#2c2c2c',
-                color: theme === 'light' ? '#000' : '#eee',
-              }}
-              value={selectedTags}
-              onChange={(value) => setSelectedTags(value)}
-              maxTagCount={3}
-            />
-          </div>
-
-          <div style={{ maxWidth: 700, width: '100%', marginTop: 24 }}>
-            <Prompts
-              wrap
-              items={
-                dynamicPrompts && dynamicPrompts.length > 0
-                  ? dynamicPrompts.map((item) => ({
-                      key: item.key,
-                      icon: <BulbOutlined style={{ color: '#1890ff' }} />,
-                      description: item.description,
-                    }))
-                  : [{ key: 'loading', label: 'Loading...', description: 'Loading general questions...' }]
-              }
-              onItemClick={(info) => {
-                onSubmit(info.data.description as string);
-              }}
-              styles={{
-                list: { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 },
-                item: {
-                  cursor: 'pointer',
-                  borderRadius: 12,
-                  backgroundColor: theme === 'light' ? '#f9fbfd' : '#1e1e1e',
-                  color: theme === 'light' ? '#000' : '#eee',
-                  padding: '10px 12px',
-                  userSelect: 'none',
-                },
-              }}
-            />
-          </div>
-        </div>
       )}
     </div>
   );
@@ -424,23 +388,36 @@ const Independent: React.FC<IndependentProps> = ({ dynamicPrompts: parentPrompts
     >
       {/* Left column (headerSection + map) — keep your HeaderSection wrapper */}
       <div className="sidebar">
-        {/* <HeaderSection
-          isOpen={sidebarOpen}
-          onToggle={() => setSidebarOpen(!sidebarOpen)}
-          theme={theme}
-          onThemeChange={setTheme}
-          onReset={resetToStart}
-        >
-          <div style={{ width: '100%', overflowX: 'hidden', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <TunisiaMap />
-          </div>
-        </HeaderSection> */}
+
       </div>
 
-      <div className="chat" style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
-        {chatList}
+<div className="chat" style={{ flex: 1, display: 'flex', flexDirection: 'column', height: '100%' }}>
+  {messages.length === 0 ? (
+    // Initial state: show header + prompts, sender below
+    <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+      <div style={{ marginBottom: 24 }}>{chatHeader}</div>
+      {chatSender}
+      {chatList}
+    </div>
+  ) : (
+    // After first message: sender at bottom
+    <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+      <div style={{ flex: 1, overflowY: 'auto' }}>{chatList}</div>
+      <div
+        style={{
+          position: 'sticky',
+          bottom: 0,
+          zIndex: 1000,
+           marginTop: 12,
+        }}
+      >
         {chatSender}
       </div>
+    </div>
+  )}
+</div>
+
+
     </div>
   );
 };

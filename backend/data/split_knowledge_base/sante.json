@@ -1,0 +1,87 @@
+[
+  {
+    "nom": "COMAR Santé Internationale",
+    "url": "https://www.comar.tn/particuliers/comar-sante-internationale",
+    "sections": {
+      "aperçu": "Bénéficier d'une protection santé complète, en Tunisie et à l'étranger, est une priorité pour vous et votre famille ! Votre contrat COMAR Santé Internationale vous permet un accès aux soins auprès des meilleurs spécialistes et établissements en Tunisie et à l'international.",
+      "couverture": "Une couverture de vos frais de santé jusqu'à 2.5 Millions de dinars tunisiens par personne et par an avec une prise en charge intégrale des frais d'hospitalisation et de maladie, sans aucune avance en Tunisie et à l'étranger. Un libre choix du pays et de l'établissement de prise en charge (Zone 1 : Tunisie + Europe sauf UK et Suisse; Zone 2 : Monde entier sauf USA). Remboursement en 7 jours au maximum. L'âge limite à la souscription du contrat est 65 ans.",
+      "plans": "DES PLANS D'ASSURANCE SUR MESURE: Nos solutions prévoient les meilleurs soins pour vous et votre famille, incluant tous les traitements et services médicaux répondant à vos différents besoins.",
+      "services": [
+        "Prise en charge intégrale des frais d'hospitalisation et maladie",
+        "Assistance médicale en cas d'urgence",
+        "Remboursement en 7 jours",
+        "Choix libre du pays et établissement de soins"
+      ],
+      "couverture_medicale": [
+        "Consultations médecins généralistes et spécialistes : Dans la limite de 10.000 DT",
+        "Pharmacie : Dans la limite de 5.000 DT",
+        "Analyses et examens médicaux (sans hospitalisation)",
+        "Accouchement normal : Dans la limite de 10.000 DT",
+        "Complications de la grossesse et de l'accouchement",
+        "Couveuse : Dans la limite de 80.000 DT",
+        "Soins dentaires : Dans la limite de 1.500 DT",
+        "Optique : Dans la limite de 750 DT",
+        "Médecine courante : Plafond porté à 30.000 DT"
+      ],
+      "fonctionnalités_spéciales": [
+        "CANCER PROTECT : capital pour bénéficiaire(s) atteint(s) du cancer",
+        "Deuxième Avis Médical : Fournir un avis écrit d'un médecin exerçant dans un centre médical de renommée mondiale"
+      ],
+      "contact": {
+        "adresse": "COMAR Avenue Habib Bourguiba 1001 Tunis R.P",
+        "téléphone": "(216) 71 340 899",
+        "service_client": "82 100 001",
+        "fax": "(216) 71 344 778",
+        "email": "contact@comar.tn"
+      },
+      "légal": [
+        "Politique de protection de données",
+        "Charte de protection de données",
+        "En vous abonnant à notre newsletter, vous reconnaissez avoir pris connaissance de notre politique de gestion des données personnelles et vous l’acceptez"
+      ]
+    }
+  },
+  {
+    "nom": "COMAR Santé OUSRATI",
+    "url": "https://www.comar.tn/particuliers/sante-ousrati",
+    "sections": {
+      "aperçu": "Notre offre Individuelle Santé a été enrichie par la mise en place d'une formule perfectionnée de notre contrat : OUSRATI. OUSRATI : une assurance Santé Individuelle et familiale sur mesure.",
+      "couverture": "La garantie Maladie - Maternité : vous couvre vous-même ainsi que les membres de votre famille avec une limite annuelle selon votre choix parmi les trois niveaux de garanties proposés. Individuelle Chirurgicale : vous accorde un plafond de couverture complémentaire pour tous les frais liés à une intervention chirurgicale (Frais de pharmacie, analyses, radiologie, honoraires du chirurgien, frais de séjour en clinique, aide à domicile/garde malade). Les prestations de l'Assistance médicale en cas d'urgence incluent envoi d'un médecin ou infirmier, évacuation médicale, prise en charge des frais de l'hospitalisation d'urgence, retour au domicile, prolongation de repos sur place, etc. Hospitalisation, incapacité, invalidité et capital décès sont couverts selon les options choisies.",
+      "plans": "Les avantages du contrat OUSRATI : Règlements des sinistres en 10 jours. Pour la garantie Maladie-Maternité sous les options FONDANMENTAL & CONFORT, prise en charge des frais de soins sans avance dans certaines cliniques. Option PREMIUM : large réseau de prestataires conventionnés.",
+      "services": [
+        "Assistance médicale en cas d'urgence",
+        "Hospitalisation : indemnité journalière",
+        "Incapacité : indemnité journalière pendant un an",
+        "Invalidité : rente jusqu’à 60 ans",
+        "Capital Décès selon option choisie"
+      ],
+      "couverture_medicale": [
+        "Consultations médecins généralistes et spécialistes : Dans la limite de 10.000 DT",
+        "Pharmacie : Dans la limite de 5.000 DT",
+        "Analyses et examens médicaux (sans hospitalisation)",
+        "Accouchement normal : Dans la limite de 10.000 DT",
+        "Complications de la grossesse et de l'accouchement",
+        "Couveuse : Dans la limite de 80.000 DT",
+        "Soins dentaires : Dans la limite de 1.500 DT",
+        "Optique : Dans la limite de 750 DT",
+        "Médecine courante : Plafond porté à 30.000 DT"
+      ],
+      "fonctionnalités_spéciales": [
+        "CANCER PROTECT : capital pour bénéficiaire(s) atteint(s) du cancer",
+        "Deuxième Avis Médical : avis écrit d'un médecin d'un centre médical renommé"
+      ],
+      "contact": {
+        "adresse": "COMAR Avenue Habib Bourguiba 1001 Tunis R.P",
+        "téléphone": "(216) 71 340 899",
+        "service_client": "82 100 001",
+        "fax": "(216) 71 344 778",
+        "email": "contact@comar.tn"
+      },
+      "légal": [
+        "Politique de protection de données",
+        "Charte de protection de données",
+        "En vous abonnant à notre newsletter, vous reconnaissez avoir pris connaissance de notre politique de gestion des données personnelles et vous l’acceptez"
+      ]
+    }
+  }
+]
