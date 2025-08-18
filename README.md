@@ -99,7 +99,7 @@ venv\Scripts\activate
 pip install -r requirements-backend.txt
 
 # Lancer le serveur
-uvicorn main:app --reload
+uvicorn maine:app --reload
 ```
 
 ### 4.4 Frontend
