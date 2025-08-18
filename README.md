@@ -53,22 +53,58 @@ L’objectif est d’offrir un service interactif, accessible en ligne et capabl
 
 ## 4. Installation et exécution
 
-### 4.1 Cloner le projet
+### 4.1 Prérequis
+- Installer **Git** : [https://git-scm.com/downloads](https://git-scm.com/downloads)
+
+- Installer **Node.js** : [https://nodejs.org/](https://nodejs.org/)  
+- Version recommandée de Node.js : 18.x ou supérieure
+
+  Vérifiez :  
+  ```
+  node -v
+  npm -v
+  ```
+- Installer **Python** : [https://www.python.org/downloads/](https://www.python.org/downloads/)  
+- Version recommandée de Python : 3.10 ou supérieure
+
+  Vérifiez :  
+  ```
+  python --version
+  pip --version
+  ```
+---
+
+### 4.2 Cloner le projet
+
 ```
 git clone https://github.com/emna9/Chatbot.git
 cd Chatbot
 ```
+---
 
-### 4.2 Backend
+### 4.3 Backend
 ```
 cd backend
-pip install -r requirements.txt
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
+
+# Créer un environnement virtuel
+python -m venv venv
+
+# Activer l’environnement
+# (Linux/Mac)
+source venv/bin/activate
+# (Windows)
+venv\Scripts\activate
+
+# Installer les dépendances
+pip install -r requirements-backend.txt
+
+# Lancer le serveur
+uvicorn main:app --reload
 ```
 
-### 4.3 Frontend
+### 4.4 Frontend
 ```
-cd ../frontend
-npm install $(cat requirements-frontend.txt)
+cd frontend
+npm install
 npm start
 ```

@@ -73,8 +73,6 @@ const TunisiaMap: React.FC = () => {
       }
     );
   }, []);
-
-  // When the map ref is ready, fix gray tiles
   useEffect(() => {
     if (mapRef.current) {
       setTimeout(() => mapRef.current?.invalidateSize(), 100);
